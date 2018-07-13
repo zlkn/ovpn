@@ -1,0 +1,5 @@
+# nice try
+---
+- hosts: zlkn.ru
+  roles:
+    - ovpn

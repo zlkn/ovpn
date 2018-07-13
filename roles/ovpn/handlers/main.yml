@@ -1,0 +1,7 @@
+---
+# handlers file for openvpn
+- name: restart openvpn@server
+  service: name=openvpn@server state=restarted
+
+- name: reload ufw
+  ufw: state=reloaded

@@ -1,0 +1,26 @@
+---
+user: ovpn
+openvpn_clients:
+  - pc
+  - phone
+
+openvpn_port: 1194
+openvpn_protocol: udp
+openvpn_server:
+openvpn_ip_address:
+easyrsa_version: EasyRSA-3.0.1
+
+openvpn_dh: /home/{{user}}/openvpn/serverside/{{easyrsa_version}}/pki/dh.pem
+
+easyrsa_url: https://github.com/OpenVPN/easy-rsa/releases/download/3.0.1/{{easyrsa_version}}.tgz
+clientside: /home/{{user}}/openvpn/clientside
+serverside: /home/{{user}}/openvpn/serverside
+easyrsa_client: "{{clientside}}/{{easyrsa_version}}"
+easyrsa_server: "{{serverside}}/{{easyrsa_version}}"
+
+private_subnets:
+  - 10.8.0.0 255.255.255.0
+
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4

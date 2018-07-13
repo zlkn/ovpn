@@ -1,0 +1,40 @@
+local {{ansible_default_ipv4.address}}
+port {{openvpn_port}}
+proto {{openvpn_protocol}}
+
+dev tun
+
+ca /etc/openvpn/keys/ca.crt
+cert /etc/openvpn/keys/{{ansible_hostname}}.crt
+key /etc/openvpn/keys/{{ansible_hostname}}.key  # This file should be kept secret
+dh /etc/openvpn/keys/dh.pem
+tls-auth /etc/openvpn/keys/ta.key
+
+key-direction 1
+
+cipher AES-256-CBC
+
+server 10.8.10.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+
+client-to-client
+keepalive 10 120
+
+comp-lzo
+
+user nobody
+group nogroup
+
+persist-key
+persist-tun
+
+status /var/log/openvpn-status.log
+log    /var/log/openvpn.log
+
+verb 5
+
+mute 3
